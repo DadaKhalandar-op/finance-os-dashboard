@@ -1,0 +1,145 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Google Fonts ─────────────────────────────────────────────────────────── */
+/* Add these two <link> tags to your index.html <head> instead of @import here  */
+/* for better performance. See comment at bottom of file.                        */
+
+@layer base {
+  /*
+   * CSS variables use BARE HSL channels — no hsl() wrapper.
+   * Tailwind config wraps them: hsl(var(--background)) → hsl(210 40% 98%)
+   * This is the canonical shadcn/ui pattern for Tailwind v3.
+   */
+
+  :root {
+    /* ── Page & surface ──────────────────────────────────────────────────── */
+    --background:             210 30% 94%;    /* slate-50  equivalent        */
+    --foreground:             222 47% 11%;    /* slate-900 equivalent        */
+
+    --card:                   210 40% 98%;      /* pure white                  */
+    --card-foreground:        222 47% 11%;
+
+    --popover:                0 0% 100%;
+    --popover-foreground:     222 47% 11%;
+
+    /* ── Brand / interactive ─────────────────────────────────────────────── */
+    --primary:                160 84% 39%;    /* emerald-600                 */
+    --primary-foreground:     0 0% 100%;
+
+    --secondary:              215 28% 17%;    /* slate-800                   */
+    --secondary-foreground:   210 40% 98%;
+
+    /* ── Semantic ────────────────────────────────────────────────────────── */
+    --muted:                  214 32% 91%;    /* slate-200                   */
+    --muted-foreground:       215 16% 47%;    /* slate-500                   */
+
+    --accent:                 152 76% 95%;    /* emerald-50                  */
+    --accent-foreground:      160 84% 39%;    /* emerald-600                 */
+
+    --destructive:            0 84% 60%;      /* rose-500                    */
+    --destructive-foreground: 0 0% 100%;
+
+    /* ── Chrome ──────────────────────────────────────────────────────────── */
+    --border:                 214 32% 91%;    /* slate-200                   */
+    --input:                  214 32% 91%;
+    --ring:                   160 84% 39%;    /* emerald-600 — focus rings   */
+    --radius:                 0.625rem;
+
+    /* ── Recharts chart palette ──────────────────────────────────────────── */
+    --chart-1:                160 84% 39%;    /* emerald  */
+    --chart-2:                346 77% 62%;    /* rose     */
+    --chart-3:                239 84% 67%;    /* indigo   */
+    --chart-4:                43  96% 56%;    /* amber    */
+    --chart-5:                271 81% 66%;    /* violet   */
+
+    /* ── Sidebar (always dark regardless of page theme) ─────────────────── */
+    --sidebar:                222 47% 11%;    /* slate-900                   */
+    --sidebar-foreground:     210 40% 98%;
+    --sidebar-primary:        160 84% 39%;    /* emerald-600                 */
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent:         215 28% 17%;    /* slate-800                   */
+    --sidebar-accent-foreground:  210 40% 98%;
+    --sidebar-border:         215 28% 17%;    /* slate-800                   */
+    --sidebar-ring:           160 84% 39%;
+  }
+
+  .dark {
+    /* ── Page & surface ──────────────────────────────────────────────────── */
+    --background:             222 47% 6%;     /* gray-950 equivalent         */
+    --foreground:             210 40% 98%;
+
+    --card:                   222 47% 9%;     /* slate-900/60 equivalent     */
+    --card-foreground:        210 40% 98%;
+
+    --popover:                222 47% 9%;
+    --popover-foreground:     210 40% 98%;
+
+    /* ── Brand / interactive ─────────────────────────────────────────────── */
+    --primary:                160 84% 39%;    /* emerald stays the same      */
+    --primary-foreground:     0 0% 100%;
+
+    --secondary:              215 28% 17%;
+    --secondary-foreground:   210 40% 98%;
+
+    /* ── Semantic ────────────────────────────────────────────────────────── */
+    --muted:                  215 28% 17%;    /* slate-800                   */
+    --muted-foreground:       215 20% 65%;    /* slate-400                   */
+
+    --accent:                 215 28% 17%;
+    --accent-foreground:      210 40% 98%;
+
+    --destructive:            0 63% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* ── Chrome ──────────────────────────────────────────────────────────── */
+    --border:                 215 28% 17%;    /* slate-800                   */
+    --input:                  215 28% 17%;
+    --ring:                   160 84% 39%;
+
+    /* ── Charts ──────────────────────────────────────────────────────────── */
+    --chart-1:                160 84% 39%;
+    --chart-2:                346 77% 62%;
+    --chart-3:                239 84% 67%;
+    --chart-4:                43  96% 56%;
+    --chart-5:                271 81% 66%;
+
+    /* ── Sidebar (same dark palette as light mode — sidebar is always dark) ─ */
+    --sidebar:                222 47% 9%;
+    --sidebar-foreground:     210 40% 98%;
+    --sidebar-primary:        160 84% 39%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent:         215 28% 17%;
+    --sidebar-accent-foreground:  210 40% 98%;
+    --sidebar-border:         215 28% 17%;
+    --sidebar-ring:           160 84% 39%;
+  }
+
+  /* ── Global resets ───────────────────────────────────────────────────────── */
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    /* font-sans resolves to DM Sans via tailwind.config.js */
+    @apply font-sans;
+    /* Smooth scrolling for anchor navigation */
+    scroll-behavior: smooth;
+  }
+
+  /* ── Input date picker colour-scheme (light/dark calendar popup) ─────────── */
+  input[type="date"] {
+    color-scheme: light;
+  }
+  .dark input[type="date"] {
+    color-scheme: dark;
+  }
+}
